@@ -11,6 +11,8 @@ from utils.augmentations import horisontal_flip
 from torch.utils.data import Dataset
 import torchvision.transforms as transforms
 
+from PIL import ImageFile
+ImageFile.LOAD_TRUNCATED_IMAGES = True
 
 def pad_to_square(img, pad_value):
     c, h, w = img.shape

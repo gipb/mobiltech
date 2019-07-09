@@ -43,8 +43,8 @@ if __name__ == "__main__":
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-    os.makedirs("output", exist_ok=True)
-    os.makedirs("checkpoints", exist_ok=True)
+    os.makedirs("/mnt/nas/output", exist_ok=True)
+    os.makedirs("/mnt/nas/checkpoints", exist_ok=True)
 
     # Get data configuration
     data_config = parse_data_config(opt.data_config)
@@ -175,4 +175,4 @@ if __name__ == "__main__":
             print(f"---- mAP {AP.mean()}")
 
         if epoch % opt.checkpoint_interval == 0:
-            torch.save(model.state_dict(), f"checkpoints/yolov3_ckpt_%d.pth" % epoch)
+            torch.save(model.state_dict(), f"/mnt/nas/checkpoints/yolov3_ckpt_%d.pth" % epoch)
