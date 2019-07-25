@@ -9,7 +9,7 @@ class CornerNet(Base):
         from .models.CornerNet import model
 
         cfg_path   = get_file_path("..", "configs", "CornerNet.json")
-        model_path = get_file_path("..", "cache", "nnet", "CornerNet", "CornerNet_500000.pkl")
+        model_path = get_file_path("mnt", "nas", "cornernet", "cache", "nnet", "CornerNet", "CornerNet_500000.pkl")
 
         cfg_sys, cfg_db = load_cfg(cfg_path)
         sys_cfg = SystemConfig().update_config(cfg_sys)
@@ -24,7 +24,7 @@ class CornerNet_Squeeze(Base):
         from .models.CornerNet_Squeeze import model
 
         cfg_path   = get_file_path("..", "configs", "CornerNet_Squeeze.json")
-        model_path = get_file_path("..", "cache", "nnet", "CornerNet_Squeeze", "CornerNet_Squeeze_500000.pkl")
+        model_path = get_file_path("mnt", "nas", "cornernet", "cache", "nnet", "CornerNet_Squeeze", "CornerNet_Squeeze_500000.pkl")
 
         cfg_sys, cfg_db = load_cfg(cfg_path)
         sys_cfg = SystemConfig().update_config(cfg_sys)
@@ -39,7 +39,7 @@ class CornerNet_Saccade(Base):
         from .models.CornerNet_Saccade import model
 
         cfg_path   = get_file_path("..", "configs", "CornerNet_Saccade.json")
-        model_path = get_file_path("..", "cache", "nnet", "CornerNet_Saccade", "CornerNet_Saccade_500000.pkl")
+        model_path = get_file_path("mnt", "nas", "cornernet", "cache", "nnet", "CornerNet_Saccade", "CornerNet_Saccade_500000.pkl")
 
         cfg_sys, cfg_db = load_cfg(cfg_path)
         sys_cfg = SystemConfig().update_config(cfg_sys)

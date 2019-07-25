@@ -23,10 +23,10 @@ class SystemConfig(object):
         self._configs["chunk_sizes"]       = None
 
         # Directories
-        self._configs["data_dir"]   = "./data"
-        self._configs["cache_dir"]  = "./cache"
+        self._configs["data_dir"]   = "/mnt/nas/data"
+        self._configs["cache_dir"]  = "/mnt/nas/cornernet/cache"
         self._configs["config_dir"] = "./config"
-        self._configs["result_dir"] = "./results"
+        self._configs["result_dir"] = "/mnt/nas/cornernet/results"
 
         # Split
         self._configs["train_split"] = "training"

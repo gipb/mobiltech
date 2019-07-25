@@ -29,7 +29,7 @@ def cornernet(db, nnet, result_dir, debug=False, decode_func=decode):
     if not os.path.exists(debug_dir):
         os.makedirs(debug_dir)
 
-    if db.split != "trainval2014":
+    if db.split != "train2014":
         db_inds = db.db_inds[:100] if debug else db.db_inds
     else:
         db_inds = db.db_inds[:100] if debug else db.db_inds[:5000]

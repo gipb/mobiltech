@@ -1,4 +1,5 @@
 import os
+import sys
 import json
 import numpy as np
 
@@ -61,8 +62,8 @@ class COCO(DETECTION):
             coco_dir = os.path.join(sys_config.data_dir, "coco")
 
             self._split     = {
-                "trainval": "trainval2014",
-                "minival":  "minival2014",
+                "trainval": "train2014",
+                "minival":  "val2014",
                 "testdev":  "testdev2017"
             }[split]
             self._data_dir  = os.path.join(coco_dir, "images", self._split)
@@ -73,6 +74,7 @@ class COCO(DETECTION):
             self._db_inds   = np.arange(len(self._image_ids))
 
     def _load_coco_annos(self):
+        sys.path.append('/mnt/nas/data/coco/PythonAPI')
         from pycocotools.coco import COCO
 
         coco = COCO(self._anno_file)

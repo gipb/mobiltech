@@ -31,7 +31,7 @@ def parse_args():
     parser.add_argument("--iter", dest="start_iter",
                         help="train at iteration i",
                         default=0, type=int)
-    parser.add_argument("--workers", default=4, type=int)
+    parser.add_argument("--workers", default=1, type=int)
     parser.add_argument("--initialize", action="store_true")
 
     parser.add_argument("--distributed", action="store_true")

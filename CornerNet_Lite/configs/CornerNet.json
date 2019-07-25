@@ -19,9 +19,9 @@
         "stepsize": 450000,
         "snapshot": 5000,
 
-        "chunk_sizes": [4, 5, 5, 5, 5, 5, 5, 5, 5, 5],
+        "chunk_sizes": [49],
 
-        "data_dir": "./data"
+        "data_dir": "/mnt/nas/data"
     },
     
     "db": {
