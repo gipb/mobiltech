@@ -352,6 +352,8 @@ class DeformConv(nn.Module):
         self.conv = DCN(chi, cho, kernel_size=(3,3), stride=1, padding=1, dilation=1, deformable_groups=1)
 
     def forward(self, x):
+        print(x)
+        print(type(x))
         x = self.conv(x)
         x = self.actf(x)
         return x
@@ -377,14 +379,16 @@ class IDAUp(nn.Module):
             setattr(self, 'node_' + str(i), node)
                  
         
+    
     def forward(self, layers, startp, endp):
+        startp = startp.item()
+        endp = endp.item()
         for i in range(startp + 1, endp):
             upsample = getattr(self, 'up_' + str(i - startp))
             project = getattr(self, 'proj_' + str(i - startp))
             layers[i] = upsample(project(layers[i]))
             node = getattr(self, 'node_' + str(i - startp))
             layers[i] = node(layers[i] + layers[i - 1])
-
 
 
 class DLAUp(nn.Module):
@@ -408,8 +412,10 @@ class DLAUp(nn.Module):
         out = [layers[-1]] # start with 32
         for i in range(len(layers) - self.startp - 1):
             ida = getattr(self, 'ida_{}'.format(i))
-            ida(layers, len(layers) -i - 2, len(layers))
-            out.insert(0, layers[-1])
+            #import pdb; pdb.set_trace()
+            ida(layers, torch.tensor(len(layers) - i -2), torch.tensor(len(layers)))
+            print("Here3!")
+            out.insert(0, config[0][-1])
         return out
 
 
