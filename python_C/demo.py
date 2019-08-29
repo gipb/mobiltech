@@ -15,7 +15,7 @@ video_ext = ['mp4', 'mov', 'avi', 'mkv']
 time_stats = ['tot', 'load', 'pre', 'net', 'dec', 'post', 'merge']
 
 def demo(args):
-  opt = opts().init(args)
+  opt = opts().init()
   os.environ['CUDA_VISIBLE_DEVICES'] = opt.gpus_str
   #opt.debug = max(opt.debug, 1)
   opt.debug = max(opt.debug, 4)

@@ -6,6 +6,11 @@ main(int argc, char *argv[])
   PyObject *pName, *pModule, *pFunc;
   PyObject *pArgs, *pValue;
   int i;
+  wchar_t** argvs = (wchar_t**)calloc(1, sizeof(wchar_t*)*(argc-1));
+  for (i=0; i<argc-1; ++i){
+	wchar_t* _arg = Py_DecodeLocale(argv[i+1], NULL);
+	argvs[i] = _arg;
+  }
   
   Py_Initialize();
   pName = PyUnicode_FromString(argv[1]);
@@ -19,29 +24,30 @@ main(int argc, char *argv[])
 	/* pFunc is a new reference */
 	
 	if (pFunc && PyCallable_Check(pFunc)) {
-	  pArgs = PyTuple_New(argc - 3);
+	  pArgs = PyTuple_New(argc-3);
+	  Py_Main(argc-1,argvs);
 	  for (i = 0; i < argc - 3; ++i) {
-		pValue = PyLong_FromLong(atoi(argv[i + 3]));
+		pValue = PyUnicode_FromString(argv[i+3]);
 		if (!pValue) {
 		  Py_DECREF(pArgs);
 		  Py_DECREF(pModule);
 		  fprintf(stderr, "Cannot convert argument\n");
 		  return 1;
 		}
-		/* pValue reference stolen here: */
+
 		PyTuple_SetItem(pArgs, i, pValue);
 	  }
 	  pValue = PyObject_CallObject(pFunc, pArgs);
 	  Py_DECREF(pArgs);
 	  if (pValue != NULL) {
-		printf("Result of call: %ld\n", PyLong_AsLong(pValue));
+		printf("Result of call : %ld\n", PyLong_AsLong(pValue));
 		Py_DECREF(pValue);
 	  }
 	  else {
 		Py_DECREF(pFunc);
 		Py_DECREF(pModule);
 		PyErr_Print();
-		fprintf(stderr,"Call failed\n");
+		fprintf(stderr, "Call failed\n");
 		return 1;
 	  }
 	}
@@ -62,5 +68,6 @@ main(int argc, char *argv[])
 	return 120;
   }*/
   Py_Finalize();
+  free(argvs);
   return 0;
 }
